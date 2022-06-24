@@ -60,6 +60,7 @@ func RunWeb(r *znet.Engine, app *App, controllers []Router) {
 		err := zutil.TryCatch(func() error {
 			typeOf := reflect.TypeOf(c).Elem()
 			controller := strings.TrimPrefix(typeOf.String(), "controller.")
+			controller = strings.Replace(controller, ".", "/", -1)
 			api := -1
 			for i := 0; i < typeOf.NumField(); i++ {
 				if typeOf.Field(i).Type.String() == "service.App" {

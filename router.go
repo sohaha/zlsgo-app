@@ -2,6 +2,7 @@ package main
 
 import (
 	"zlsapp/controller"
+	"zlsapp/controller/wechat"
 	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/znet"
@@ -11,6 +12,10 @@ import (
 func InitRouter(_ *service.Conf) []service.Router {
 	return []service.Router{
 		&controller.Home{},
+		&wechat.Pay{},
+		&wechat.Mp{},
+		&wechat.Open{},
+		&wechat.Qy{},
 	}
 }
 

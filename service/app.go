@@ -10,11 +10,12 @@ import (
 
 var Global *App
 
-func InitApp(conf *Conf, di zdi.Injector) *App {
+func InitApp(conf *Conf, di zdi.Injector, wechat *Wechat) *App {
 	Global = &App{
-		Di:   di,
-		Conf: conf,
-		Log:  initLog(conf),
+		Di:     di,
+		Conf:   conf,
+		Wechat: wechat,
+		Log:    initLog(conf),
 	}
 	return Global
 }

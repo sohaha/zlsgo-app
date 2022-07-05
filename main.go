@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/zdi"
@@ -31,7 +33,6 @@ _____
 		di = InitDI()
 
 		zerror.Panic(zerror.With(di.Resolve(&c), "配置读取失败"))
-
 		zcli.Run(func() {
 			_, err = di.Invoke(service.RunWeb)
 			if err != nil {
@@ -49,6 +50,9 @@ _____
 			zcli.Error(err.Error())
 		} else {
 			zlog.Errorf("%+v\n", err)
+		}
+		if zcli.IsDoubleClickStartUp() {
+			_, _ = fmt.Scanln()
 		}
 	}
 }

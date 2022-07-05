@@ -3,3 +3,43 @@ debug = true
 name = 'ZlsApp'
 port = '8181'
 
+[db]
+driver = 'mysql'
+[db.mysql]
+Host = '127.0.0.1'
+Port = 3306
+User = 'root'
+Password = '666666'
+DBName = 'zls'
+Parameters = ''
+
+
+[wechat]
+debug = true
+
+[wechat.mp]
+AppID = 'wx6a24b584b45b6791'
+AppSecret = 'cc31573bfa7af4cdc2ba327357af9234'
+EncodingAesKey = ''
+Token = ''
+
+[wechat.open]
+AppID = 'wx04218a3ebc590de2'
+AppSecret = '02e1ec10d4b7b1d2f780b58801f57ff2'
+EncodingAesKey = 'dt666dt666dt666dt666dt666dt666dt666dt666dt6'
+Token = 'wxwx'
+
+[wechat.qy]
+AgentID = '1000002'
+Secret = 'PSNMWVfB-g2MjMNfmirIIM9x2cJIG0Xsex-ZOjp_xjk'
+EncodingAesKey = 'wHG3DlQBPSsDPs7zYM2zahtqY6Y35XKoQECfJtYx1UL'
+Token = 'wxwx'
+CorpID = 'wwd59c101ae58adb2b'
+
+[wechat.weapp]
+AppID = 'wx1a01b1c7bbf39ac1'
+AppSecret = 'a9de468f1b8b9268c921a0814da09187'
+EncodingAesKey = 'dt666dt666dt666dt666dt666dt666dt666dt666dt6'
+Token = ''
+
+

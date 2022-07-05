@@ -18,6 +18,10 @@ func (h *Home) Init(r *znet.Engine) {
 	r.NotFoundHandler(func(c *znet.Context) {
 		c.ApiJSON(404, "此路不通", nil)
 	})
+
+	r.Any("ping", func(c *znet.Context) {
+		c.ApiJSON(200, "pong", nil)
+	})
 }
 
 func (h *Home) Get(c *znet.Context) {

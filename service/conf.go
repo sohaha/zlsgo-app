@@ -11,14 +11,16 @@ import (
 
 // Conf 配置项
 type Conf struct {
-	Base conf.Base
+	Base   conf.Base
+	DB     conf.DB
+	Wechat conf.Wechat
 }
 
-func InitConf() *Conf {
+func InitConf(defaultSet []interface{}) *Conf {
 	c := &Conf{}
 	cfg := gconf.New(conf.FileName)
 
-	for _, c := range conf.DefaultConf {
+	for _, c := range defaultSet {
 		m, t := make(map[string]interface{}), reflect.TypeOf(c)
 
 		isPrt := t.Kind() == reflect.Ptr

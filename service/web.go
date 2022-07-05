@@ -16,9 +16,10 @@ import (
 type (
 	// App 控制器关联对象
 	App struct {
-		Di   zdi.Injector
-		Conf *Conf
-		Log  *zlog.Logger
+		Di     zdi.Injector
+		Conf   *Conf
+		Log    *zlog.Logger
+		Wechat *Wechat
 	}
 	// Router 控制器函数
 	Router interface {
@@ -30,7 +31,7 @@ type (
 func InitWeb(app *App, middlewares []znet.Handler) *znet.Engine {
 	r := znet.New()
 	r.Log = app.Log
-	r.BindStructSuffix = ".go"
+	// r.BindStructSuffix = ".go"
 	r.BindStructDelimiter = "-"
 	r.SetAddr(app.Conf.Base.Port)
 
@@ -88,6 +89,5 @@ func RunWeb(r *znet.Engine, app *App, controllers []Router) {
 
 func StopWeb(_ *znet.Engine, _ *App) {
 	znet.SetShutdown(func() {
-
 	})
 }

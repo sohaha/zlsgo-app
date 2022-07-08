@@ -7,6 +7,7 @@ import (
 	"zlsapp/logic/code"
 	"zlsapp/service"
 
+	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/zstring"
 
@@ -54,6 +55,24 @@ func (w *Mp) GetAuth(c *znet.Context) {
 	}
 
 	code.Success.ApiResult(c, user.Value())
+}
+
+// GetCodeAuth 通过 Code 获取用户 Openid
+func (w *Mp) GetCodeAuth(c *znet.Context) {
+	// https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6a24b584b45b6791&redirect_uri=encodeURIComponent编码回调地址&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect
+	cod, ok := c.GetQuery("code")
+	if !ok {
+		code.InvalidInput.ApiResult(c, "code 不能为空")
+	}
+	_ = cod
+	wx := w.App.Wechat.Mp
+	res, err := wx.GetAuthInfo(cod)
+	if err != nil {
+		code.InvalidInput.ApiResult(c, err)
+		return
+	}
+	zlog.Success("授权成功", res)
+	code.Success.ApiResult(c, res.Get("openid").String())
 }
 
 // GetAccessToken 获取 AccessToken

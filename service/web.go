@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -43,7 +44,10 @@ func InitWeb(app *App, middlewares []znet.Handler) *znet.Engine {
 		if isDebug {
 			c.Log.Track(err.Error(), 20)
 		}
-		c.ApiJSON(500, err.Error(), struct{}{})
+		c.JSON(http.StatusInternalServerError, znet.ApiData{
+			Code: http.StatusInternalServerError,
+			Msg:  err.Error(),
+		})
 	}))
 
 	for _, middleware := range middlewares {
@@ -54,8 +58,6 @@ func InitWeb(app *App, middlewares []znet.Handler) *znet.Engine {
 }
 
 func RunWeb(r *znet.Engine, app *App, controllers []Router) {
-	zlog.Tips("启动 web 服务...")
-
 	for _, c := range controllers {
 		err := zutil.TryCatch(func() error {
 			typeOf := reflect.TypeOf(c).Elem()

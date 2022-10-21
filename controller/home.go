@@ -16,7 +16,7 @@ func (h *Home) Init(r *znet.Engine) {
 	r.Static("/static/", zfile.RealPathMkdir("./resource/static"))
 
 	r.NotFoundHandler(func(c *znet.Context) {
-		c.ApiJSON(404, "此路不通", nil)
+		c.JSON(http.StatusNotFound, znet.ApiData{Code: 404, Msg: "此路不通"})
 	})
 }
 

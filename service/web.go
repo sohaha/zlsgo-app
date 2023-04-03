@@ -179,7 +179,7 @@ func initRouter(app *App, r *Web, controllers []Controller) (err error) {
 }
 
 func StopWeb(_ *Web, _ *App) {
-	znet.SetShutdown(func() {
+	znet.OnShutdown(func() {
 
 	})
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"zlsapp/internal/lib/hashid"
 	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/zdi"
@@ -46,10 +45,6 @@ func InitDI() zdi.Injector {
 	di.Provide(RegRouterBefore)
 	di.Provide(RegPlugin)
 	di.Provide(RegTasks)
-
-	{
-		di.Provide(hashid.Reg)
-	}
 
 	return di
 }

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"net/http"
 	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/zfile"
@@ -13,7 +14,7 @@ type Home struct {
 
 func (h *Home) Init(r *znet.Engine) {
 	// 静态资源目录，常用于放上传的文件
-	r.Static("/static/", zfile.RealPathMkdir("./resource/static"))
+	r.Static("/static/", zfile.RealPathMkdir("./static"))
 
 	r.NotFoundHandler(func(c *znet.Context) {
 		c.JSON(http.StatusNotFound, znet.ApiData{Code: 404, Msg: "此路不通"})

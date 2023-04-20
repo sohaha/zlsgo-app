@@ -1,8 +1,8 @@
 package main
 
 import (
-	"zlsapp/conf"
 	"zlsapp/internal/utils"
+	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-	zcli.Name = conf.AppName
-	zcli.Version = conf.AppVersion
+	zcli.Name = service.AppName
 	zcli.EnableDetach = true
 
 	err := zutil.TryCatch(func() (err error) {
-		utils.Fatal(Init())
-		zcli.Run(func() {
-			utils.Fatal(Start())
+		di := InitDI()
+
+		err = zcli.LaunchServiceRun(zcli.Name, "", func() {
+			utils.Fatal(Start(di))
 		})
 
 		return err

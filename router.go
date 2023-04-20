@@ -2,7 +2,6 @@ package main
 
 import (
 	"zlsapp/controller"
-	// lowcode "zlsapp/module/lowcode/controller"
 	"zlsapp/service"
 
 	"github.com/sohaha/zlsgo/znet"
@@ -22,7 +21,6 @@ func RegMiddleware(_ *service.Conf, _ *service.App) []znet.Handler {
 		cors.New(&cors.Config{
 			ExposeHeaders: []string{"Authorization", "Re-Token"},
 		}),
-		// lowcode.NewCache(),
 	}
 }
 

@@ -27,6 +27,5 @@ dev:
 
 .PHONY: build
 build:test
-	# zzz build 默认是 CGO_ENABLED=0
 	zzz build --os mac,win,linux -P -T
 

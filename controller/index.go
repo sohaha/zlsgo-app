@@ -5,6 +5,7 @@ import (
 
 	"zlsapp/service"
 
+	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zfile"
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/ztime"
@@ -13,11 +14,12 @@ import (
 
 type Index struct {
 	service.App
+	DI zdi.Injector
 }
 
 func (h *Index) Init(r *znet.Engine) {
 	var web *service.Web
-	h.Di.Resolve(&web)
+	h.DI.Resolve(&web)
 
 	// 开放静态资源目录
 	r.Static("/static/", zfile.RealPath("./static"))
@@ -38,7 +40,7 @@ func (h *Index) Init(r *znet.Engine) {
 				znet.ApiData{
 					Code: 0,
 					Data: ztype.Map{
-						"App": h.Conf.Base.Name,
+						"App": service.AppName,
 						"now": ztime.Now(),
 					},
 				})

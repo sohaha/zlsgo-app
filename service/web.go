@@ -5,12 +5,15 @@ import (
 	"net/http"
 	"reflect"
 	"strings"
+
 	"zlsapp/internal/errcode"
 	"zlsapp/internal/utils"
 
+	"github.com/arl/statsviz"
 	"github.com/sohaha/zlsgo/zerror"
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/znet"
+	"github.com/sohaha/zlsgo/zpprof"
 	"github.com/sohaha/zlsgo/zstring"
 	"github.com/sohaha/zlsgo/ztype"
 	"github.com/sohaha/zlsgo/zutil"
@@ -25,7 +28,7 @@ type (
 	Controller interface {
 		Init(r *znet.Engine)
 	}
-	// RouterAfterProcess 控制器前置处理
+	// RouterBeforeProcess 控制器前置处理
 	RouterBeforeProcess func(r *Web, app *App)
 	Template            struct {
 		DIR    string
@@ -44,8 +47,8 @@ func (w *Web) GetHijack() []func(c *znet.Context) bool {
 	return w.hijacked
 }
 
-// RegWeb 初始化 WEB
-func RegWeb(app *App, middlewares []znet.Handler) (*Web, *znet.Engine) {
+// NewWeb 初始化 WEB
+func NewWeb(app *App, middlewares []znet.Handler) (*Web, *znet.Engine) {
 	r := znet.New()
 	r.Log = app.Log
 	zlog.Log = r.Log
@@ -59,6 +62,25 @@ func RegWeb(app *App, middlewares []znet.Handler) (*Web, *znet.Engine) {
 		r.SetMode(znet.DebugMode)
 	} else {
 		r.SetMode(znet.ProdMode)
+	}
+
+	if app.Conf.Base.Pprof {
+		zpprof.Register(r, app.Conf.Base.PprofToken)
+	}
+
+	if app.Conf.Base.Statsviz {
+		r.GET(`/debug/statsviz{*:[\S]*}`, func(c *znet.Context) {
+			q := c.GetParam("*")
+			if q == "" {
+				c.Redirect("/debug/statsviz/")
+				return
+			}
+			if q == "/ws" {
+				statsviz.Ws(c.Writer, c.Request)
+				return
+			}
+			statsviz.IndexAtRoot("/debug/statsviz").ServeHTTP(c.Writer, c.Request)
+		})
 	}
 
 	r.Use(znet.RewriteErrorHandler(func(c *znet.Context, err error) {
@@ -115,7 +137,7 @@ func RegWeb(app *App, middlewares []znet.Handler) (*Web, *znet.Engine) {
 }
 
 func RunWeb(r *Web, app *App, controllers *[]Controller) {
-	_, err := app.Di.Invoke(func(after RouterBeforeProcess) {
+	_, err := app.DI.Invoke(func(after RouterBeforeProcess) {
 		after(r, app)
 	})
 	if err != nil && !strings.Contains(err.Error(), "value not found for type service.RouterBeforeProcess") {
@@ -126,8 +148,8 @@ func RunWeb(r *Web, app *App, controllers *[]Controller) {
 	znet.Run()
 }
 
-func initRouter(app *App, r *Web, controllers []Controller) (err error) {
-	_, _ = app.Di.Invoke(func(r *Web) {
+func initRouter(app *App, _ *Web, controllers []Controller) (err error) {
+	_, _ = app.DI.Invoke(func(r *Web) {
 		for i := range controllers {
 			c := controllers[i]
 			err = zutil.TryCatch(func() (err error) {
@@ -146,6 +168,14 @@ func initRouter(app *App, r *Web, controllers []Controller) (err error) {
 				}
 
 				reflect.ValueOf(c).Elem().Field(api).Set(reflect.ValueOf(*app))
+
+				cDI := reflect.Indirect(reflect.ValueOf(c)).FieldByName("DI")
+				if cDI.IsValid() {
+					switch cDI.Type().String() {
+					case "zdi.Invoker", "zdi.Injector":
+						cDI.Set(reflect.ValueOf(app.DI))
+					}
+				}
 
 				name := ""
 				cName := reflect.Indirect(reflect.ValueOf(c)).FieldByName("Path")

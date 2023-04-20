@@ -1,8 +1,6 @@
 package service
 
 import (
-	"zlsapp/conf"
-
 	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zfile"
 	"github.com/sohaha/zlsgo/zlog"
@@ -11,16 +9,16 @@ import (
 
 // App 控制器关联对象
 type App struct {
-	Di   zdi.Injector
+	DI   zdi.Injector
 	Conf *Conf
 	Log  *zlog.Logger
 }
 
 var Global *App
 
-func RegApp(conf *Conf, di zdi.Injector) *App {
+func NewApp(conf *Conf, di zdi.Injector) *App {
 	Global = &App{
-		Di:   di,
+		DI:   di,
 		Conf: conf,
 		Log:  initLog(conf),
 	}
@@ -29,15 +27,24 @@ func RegApp(conf *Conf, di zdi.Injector) *App {
 
 func initLog(c *Conf) *zlog.Logger {
 	log := zlog.Log
-	log.SetPrefix(conf.LogPrefix)
+	log.SetPrefix(LogPrefix)
+
 	logFlags := zlog.BitLevel
 	if c.Base.LogPosition {
 		logFlags = logFlags | zlog.BitLongFile
 	}
 	log.ResetFlags(logFlags)
+
 	if c.Base.LogDir != "" {
 		log.SetSaveFile(zfile.RealPath(c.Base.LogDir, true)+"app.log", true)
 	}
+
+	if c.Base.Debug {
+		log.SetLogLevel(zlog.LogDump)
+	} else {
+		log.SetLogLevel(zlog.LogSuccess)
+	}
+
 	return log
 }
 
@@ -46,5 +53,5 @@ func PrintLog(tip string, v ...interface{}) {
 		zlog.ColorTextWrap(zlog.ColorLightMagenta, zstring.Pad(tip, 6, " ", zstring.PadLeft)),
 	}
 	d = append(d, v...)
-	zlog.Tips(d...)
+	zlog.Debug(d...)
 }

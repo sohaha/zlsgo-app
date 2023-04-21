@@ -29,7 +29,7 @@ func initLog(c *Conf) *zlog.Logger {
 	log := zlog.Log
 	log.SetPrefix(LogPrefix)
 
-	logFlags := zlog.BitLevel
+	logFlags := zlog.BitLevel | zlog.BitTime
 	if c.Base.LogPosition {
 		logFlags = logFlags | zlog.BitLongFile
 	}

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"reflect"
 	"zlsapp/internal/utils"
 
 	"github.com/sohaha/zlsgo/zerror"
@@ -11,7 +12,6 @@ import (
 
 type Plugin interface {
 	Name() string
-	Init(di zdi.Injector) error
 	Tasks() []Task
 	Before() error
 	After() error
@@ -19,24 +19,38 @@ type Plugin interface {
 }
 
 func InitPlugin(ps []Plugin, di zdi.Injector) (err error) {
-	for _, p := range ps {
-		if err := p.Init(di); err != nil {
-			return zerror.With(err, p.Name())
-		}
 
-		if err := p.Before(); err != nil {
+	for _, p := range ps {
+		pdi := reflect.Indirect(reflect.ValueOf(p)).FieldByName("DI")
+		if pdi.IsValid() {
+			switch pdi.Type().String() {
+			case "zdi.Invoker", "zdi.Injector":
+				pdi.Set(reflect.ValueOf(di))
+			}
+		}
+		err := zerror.TryCatch(func() error {
+			return p.Before()
+		})
+		if err != nil {
 			return zerror.With(err, p.Name())
 		}
 
 		di.Map(p)
 	}
 
-	return utils.InvokeErr(di.Invoke(func(a *App, tasks *[]Task, controller *[]Controller, r *Web) error {
+	return utils.InvokeErr(di.Invoke(func(app *App, tasks *[]Task, controller *[]Controller, r *Web) error {
 		for _, p := range ps {
 			*tasks = append(*tasks, p.Tasks()...)
 			*controller = append(*controller, p.Controller()...)
 
-			if err := p.After(); err != nil {
+			conf := reflect.Indirect(reflect.ValueOf(p)).FieldByName("Conf")
+			if conf.IsValid() && conf.Type().String() == "*service.Conf" {
+				conf.Set(reflect.ValueOf(app.Conf))
+			}
+			err := zerror.TryCatch(func() error {
+				return p.After()
+			})
+			if err != nil {
 				return zerror.With(err, p.Name())
 			}
 

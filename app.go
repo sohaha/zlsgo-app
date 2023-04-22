@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/sohaha/zlsgo/ztime"
 	"zlsapp/internal/utils"
 	"zlsapp/service"
+
+	"github.com/sohaha/zlsgo/ztime"
 
 	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zerror"
@@ -52,8 +53,9 @@ func Start(di zdi.Injector) error {
 	err = utils.InvokeErr(di.Invoke(service.RunWeb))
 	if err != nil {
 		err = zerror.With(err, "服务启动失败")
-	} else {
-		_, _ = di.Invoke(service.StopWeb)
 	}
 	return err
+}
+
+func Stop() {
 }

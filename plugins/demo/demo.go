@@ -7,12 +7,14 @@ import (
 )
 
 type Plugin struct {
+	DI   zdi.Invoker
+	Conf *service.Conf
 }
 
 var _ service.Plugin = &Plugin{}
 
-func (d *Plugin) Init(_ zdi.Injector) error {
-	return nil
+func New() *Plugin {
+	return &Plugin{}
 }
 
 func (d *Plugin) Name() string {

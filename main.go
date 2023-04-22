@@ -10,6 +10,8 @@ import (
 )
 
 func main() {
+	zlog.ResetFlags(zlog.BitLevel)
+
 	zcli.Name = service.AppName
 	zcli.EnableDetach = true
 
@@ -20,6 +22,7 @@ func main() {
 			utils.Fatal(Start(di))
 		})
 
+		_, _ = di.Invoke(Stop)
 		return err
 	})
 

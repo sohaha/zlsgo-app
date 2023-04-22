@@ -7,6 +7,6 @@ import (
 
 func RegPlugin() []service.Plugin {
 	return []service.Plugin{
-		&demo.Plugin{},
+		demo.New(),
 	}
 }

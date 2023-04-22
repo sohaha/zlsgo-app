@@ -145,7 +145,7 @@ func RunWeb(r *Web, app *App, controllers *[]Controller) {
 	}
 
 	utils.Fatal(initRouter(app, r, *controllers))
-	znet.Run()
+	r.StartUp()
 }
 
 func initRouter(app *App, _ *Web, controllers []Controller) (err error) {
@@ -206,10 +206,4 @@ func initRouter(app *App, _ *Web, controllers []Controller) (err error) {
 		}
 	})
 	return
-}
-
-func StopWeb(_ *Web, _ *App) {
-	znet.OnShutdown(func() {
-
-	})
 }

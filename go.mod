@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/arl/statsviz v0.5.2
-	github.com/larksuite/oapi-sdk-go/v3 v3.0.19
 	github.com/sohaha/zlsgo v1.5.4
 	github.com/spf13/viper v1.15.0
 	github.com/zlsgo/conf v0.0.0-20220614015108-b4ee9fc367b0
@@ -25,8 +24,7 @@ require (
 	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	golang.org/x/crypto v0.8.0 // indirect
-	golang.org/x/exp v0.0.0-20230419192730-864b3d6c5c2c // indirect
-	golang.org/x/net v0.9.0 // indirect
+	golang.org/x/exp v0.0.0-20230420155640-133eef4313cb // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.7.0 // indirect
 	golang.org/x/text v0.9.0 // indirect

@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/arl/statsviz v0.5.2
-	github.com/sohaha/zlsgo v1.5.4
+	github.com/sohaha/zlsgo v1.6.0
 	github.com/spf13/viper v1.15.0
 	github.com/zlsgo/conf v0.0.0-20220614015108-b4ee9fc367b0
 )

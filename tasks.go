@@ -1,7 +1,7 @@
 package main
 
 import (
-	"zlsapp/service"
+	"github.com/zlsgo/app_core/service"
 )
 
 // RegTasks 注册定时任务

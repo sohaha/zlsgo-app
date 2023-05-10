@@ -1,7 +1,7 @@
 package demo
 
 import (
-	"zlsapp/service"
+	"github.com/zlsgo/app_core/service"
 
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/ztype"

@@ -1,0 +1,4 @@
+[base]
+debug = true
+name = 'ZlsApp'
+port = '8181'

@@ -2,7 +2,8 @@ package main
 
 import (
 	"zlsapp/plugins/demo"
-	"zlsapp/service"
+
+	"github.com/zlsgo/app_core/service"
 )
 
 func RegPlugin() []service.Plugin {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"zlsapp/internal/utils"
-	"zlsapp/service"
+	"github.com/zlsgo/app_core/service"
+	"github.com/zlsgo/app_core/utils"
 
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"

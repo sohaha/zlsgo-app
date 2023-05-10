@@ -2,7 +2,8 @@ package main
 
 import (
 	"zlsapp/controller"
-	"zlsapp/service"
+
+	"github.com/zlsgo/app_core/service"
 
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/znet/cors"

@@ -2,35 +2,42 @@ package demo
 
 import (
 	"github.com/zlsgo/app_core/service"
-
-	"github.com/sohaha/zlsgo/zdi"
 )
 
 type Plugin struct {
-	DI   zdi.Invoker
-	Conf *service.Conf
+	service.App
 }
 
 var _ service.Plugin = &Plugin{}
 
-func (d *Plugin) Name() string {
-	return "示例插件"
+func (p *Plugin) Name() string {
+	// 插件名称
+	return "Sample"
 }
 
-func (d *Plugin) Tasks() []service.Task {
-	return []service.Task{}
-}
-
-func (d *Plugin) Before() error {
-	return nil
-}
-
-func (d *Plugin) After() error {
-	return nil
-}
-
-func (d *Plugin) Controller() []service.Controller {
+func (p *Plugin) Controller() []service.Controller {
+	// 定义控制器
 	return []service.Controller{
 		&Index{},
 	}
+}
+
+func (p *Plugin) Tasks() []service.Task {
+	// 定义定时任务
+	return []service.Task{}
+}
+
+func (p *Plugin) Load() error {
+	// 配置解析完成后执行
+	return nil
+}
+
+func (p *Plugin) Start() error {
+	// 全部插件加载完成后执行
+	return nil
+}
+
+func (p *Plugin) Done() error {
+	// 全部插件启动后执行
+	return nil
 }

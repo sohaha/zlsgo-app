@@ -12,8 +12,8 @@ type Index struct {
 }
 
 func (h *Index) Init(r *znet.Engine) {
+	// 注册中间件
 	r.Use(func(c *znet.Context) {
-		// 中间件
 		c.Next()
 	})
 }

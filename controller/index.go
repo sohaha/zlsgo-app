@@ -14,7 +14,7 @@ type Index struct {
 	service.App
 }
 
-func (h *Index) Init(r *znet.Engine) {
+func (h *Index) Init(r *znet.Engine) error {
 	// 开放静态资源目录
 	r.Static("/static/", zfile.RealPath("./static"))
 
@@ -27,6 +27,7 @@ func (h *Index) Init(r *znet.Engine) {
 				Data: struct{}{},
 			})
 	})
+	return nil
 }
 
 func (h *Index) GetError(r *znet.Context) error {

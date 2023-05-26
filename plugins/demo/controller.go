@@ -11,11 +11,12 @@ type Index struct {
 	service.App
 }
 
-func (h *Index) Init(r *znet.Engine) {
+func (h *Index) Init(r *znet.Engine) error {
 	// 注册中间件
 	r.Use(func(c *znet.Context) {
 		c.Next()
 	})
+	return nil
 }
 
 func (h *Index) GET(c *znet.Context) string {

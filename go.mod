@@ -3,8 +3,8 @@ module zlsapp
 go 1.18
 
 require (
-	github.com/sohaha/zlsgo v1.6.1
-	github.com/zlsgo/app_core v0.0.0-20230523142535-fc78af41db45
+	github.com/sohaha/zlsgo v1.6.2
+	github.com/zlsgo/app_core v0.0.0-20230526073417-fa6a676b2248
 )
 
 require (

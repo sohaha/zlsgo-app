@@ -13,6 +13,8 @@ func main() {
 	zlog.ResetFlags(zlog.BitLevel)
 
 	zcli.Name = service.AppName
+	zcli.Version = "1.0.0"
+
 	zcli.EnableDetach = true
 
 	err := zutil.TryCatch(func() (err error) {

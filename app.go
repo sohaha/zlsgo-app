@@ -26,7 +26,9 @@ func InitDI() zdi.Injector {
 
 	di.Map(di, zdi.WithInterface((*zdi.Injector)(nil)))
 
-	di.Provide(service.NewConf)
+	di.Provide(service.NewConf(func(o *conf.Option) {
+		o.AutoCreate = true
+	}))
 	di.Provide(service.NewApp)
 	di.Provide(service.NewWeb)
 

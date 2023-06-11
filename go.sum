@@ -753,6 +753,8 @@ github.com/zlsgo/app_core v0.0.0-20230526073417-fa6a676b2248 h1:XIbiwA980Vb2Zi2a
 github.com/zlsgo/app_core v0.0.0-20230526073417-fa6a676b2248/go.mod h1:huoMj5u2lrDskXQSaDzlFhNdsi0LMjcPdlQEEt5PsmQ=
 github.com/zlsgo/app_core v0.0.0-20230530142737-e5e1d0b18f72 h1:lPhCXPhxnd3mrFr1A75O1IQEpQLYppeDhVQrcIUCyEc=
 github.com/zlsgo/app_core v0.0.0-20230530142737-e5e1d0b18f72/go.mod h1:huoMj5u2lrDskXQSaDzlFhNdsi0LMjcPdlQEEt5PsmQ=
+github.com/zlsgo/app_core v0.0.0-20230611211744-07157da5575f h1:tnQobposmCRTvqRDYCdMr3oJHheMocDwKDsCxARRCVQ=
+github.com/zlsgo/app_core v0.0.0-20230611211744-07157da5575f/go.mod h1:huoMj5u2lrDskXQSaDzlFhNdsi0LMjcPdlQEEt5PsmQ=
 github.com/zlsgo/conf v0.0.0-20220614015108-b4ee9fc367b0 h1:VOfVQbRQaBarP3RSekH/v6girayNK02TtYv/xQfsI5k=
 github.com/zlsgo/conf v0.0.0-20220614015108-b4ee9fc367b0/go.mod h1:oLq4xPekZgWbWTZhOrHeoS3rrqMRxiaJYJp/L5J9JJ8=
 github.com/zlsgo/conf v0.0.0-20230530142538-c42fe7562dfa h1:wHdbVSCDViMvOWXNDiylc9i7HWAaEFH5SmBmFACWMj4=

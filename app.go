@@ -7,6 +7,7 @@ import (
 
 	"github.com/zlsgo/app_core/service"
 	"github.com/zlsgo/app_core/utils"
+	"github.com/zlsgo/conf"
 
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/znet"
@@ -29,8 +30,8 @@ func InitDI() zdi.Injector {
 	di.Provide(service.NewConf(func(o *conf.Option) {
 		o.AutoCreate = true
 	}))
-	di.Provide(service.NewApp)
-	di.Provide(service.NewWeb)
+	di.Provide(service.NewApp())
+	di.Provide(service.NewWeb())
 
 	di.Provide(RegMiddleware)
 	di.Provide(RegRouter)

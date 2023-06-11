@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/sohaha/zlsgo v1.6.2
 	github.com/zlsgo/app_core v0.0.0-20230611211744-07157da5575f
+	github.com/zlsgo/conf v0.0.0-20230530142538-c42fe7562dfa
 )
 
 require (
@@ -19,7 +20,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.16.0 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
-	github.com/zlsgo/conf v0.0.0-20230530142538-c42fe7562dfa // indirect
 	golang.org/x/crypto v0.9.0 // indirect
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 // indirect
 	golang.org/x/sync v0.2.0 // indirect

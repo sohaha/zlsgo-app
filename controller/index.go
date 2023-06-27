@@ -2,7 +2,8 @@ package controller
 
 import (
 	"net/http"
-	"zlsapp/internal/errcode"
+
+	"app/internal/errcode"
 
 	"github.com/zlsgo/app_core/service"
 

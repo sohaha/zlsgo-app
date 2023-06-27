@@ -1,7 +1,7 @@
 package main
 
 import (
-	"zlsapp/plugins/demo"
+	"app/plugins/demo"
 
 	"github.com/zlsgo/app_core/service"
 )

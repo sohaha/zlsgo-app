@@ -3,16 +3,16 @@ package main
 import (
 	"net/http"
 	"strings"
-	"zlsapp/internal/errcode"
 
-	"github.com/zlsgo/app_core/service"
-	"github.com/zlsgo/app_core/utils"
+	"app/internal/errcode"
+
+	"github.com/sohaha/zlsgo/ztime"
 	"github.com/zlsgo/conf"
 
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/znet"
-	"github.com/sohaha/zlsgo/ztime"
 	"github.com/sohaha/zlsgo/ztype"
+	"github.com/zlsgo/app_core/service"
 
 	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zerror"
@@ -30,7 +30,11 @@ func InitDI() zdi.Injector {
 	di.Provide(service.NewConf(func(o *conf.Option) {
 		o.AutoCreate = true
 	}))
-	di.Provide(service.NewApp())
+
+	di.Provide(service.NewApp(func(o *service.BaseConf) {
+		o.Port = "8181"
+	}))
+
 	di.Provide(service.NewWeb())
 
 	di.Provide(RegMiddleware)
@@ -44,27 +48,23 @@ func InitDI() zdi.Injector {
 }
 
 func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
+	var tagMap = map[zerror.TagKind]int{
+		zerror.Internal:         http.StatusInternalServerError,
+		zerror.InvalidInput:     http.StatusBadRequest,
+		zerror.PermissionDenied: http.StatusForbidden,
+		zerror.Unauthorized:     http.StatusUnauthorized,
+	}
+
 	return func(c *znet.Context, err error) {
 		var (
 			code       int32
 			statusCode = http.StatusInternalServerError
 			tag        = zerror.GetTag(err)
 		)
-
-		switch tag {
-		case zerror.Internal:
-			statusCode = http.StatusInternalServerError
+		if val, ok := tagMap[tag]; ok {
+			statusCode = val
 			code = int32(errcode.ServerError)
-		case zerror.InvalidInput:
-			statusCode = http.StatusBadRequest
-			code = int32(errcode.InvalidInput)
-		case zerror.PermissionDenied:
-			statusCode = http.StatusForbidden
-			code = int32(errcode.PermissionDenied)
-		case zerror.Unauthorized:
-			statusCode = http.StatusUnauthorized
-			code = int32(errcode.Unauthorized)
-		default:
+		} else {
 			errCode, ok := zerror.UnwrapCode(err)
 			if ok && errCode != 0 {
 				code = int32(errCode)
@@ -91,10 +91,13 @@ func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
 		})
 	}
 }
-func Start(di zdi.Injector) error {
-	err := utils.InvokeErr(di.Invoke(service.InitPlugin))
-	if err != nil {
-		return zerror.With(err, "初始化插件失败")
+
+func Init(di zdi.Injector, loadPlugin bool) (err error) {
+	if loadPlugin {
+		err = di.InvokeWithErrorOnly(service.InitPlugin)
+		if err != nil {
+			return zerror.With(err, "初始化插件失败")
+		}
 	}
 
 	err = di.Resolve(&c)
@@ -103,13 +106,16 @@ func Start(di zdi.Injector) error {
 	}
 
 	ztime.SetTimeZone(int(c.Base.Zone))
+	return nil
+}
 
-	err = utils.InvokeErr(di.Invoke(service.InitTask))
+func Start(di zdi.Injector) error {
+	err := di.InvokeWithErrorOnly(service.InitTask)
 	if err != nil {
 		return zerror.With(err, "定时任务启动失败")
 	}
 
-	err = utils.InvokeErr(di.Invoke(service.RunWeb))
+	err = di.InvokeWithErrorOnly(service.RunWeb)
 	if err != nil {
 		err = zerror.With(err, "服务启动失败")
 	}

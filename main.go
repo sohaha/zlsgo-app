@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/zlsgo/app_core/common"
 	"github.com/zlsgo/app_core/service"
-	"github.com/zlsgo/app_core/utils"
 
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
@@ -21,7 +21,7 @@ func main() {
 		di := InitDI()
 
 		err = zcli.LaunchServiceRun(zcli.Name, "", func() {
-			utils.Fatal(Start(di))
+			common.Fatal(Start(di))
 		})
 
 		_, _ = di.Invoke(Stop)

@@ -1,26 +1,25 @@
 package main
 
 import (
-	"github.com/zlsgo/app_core/common"
-	"github.com/zlsgo/app_core/service"
-
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/zutil"
+	"github.com/zlsgo/app_core/common"
+	"github.com/zlsgo/app_core/service"
 )
 
 func main() {
 	zlog.ResetFlags(zlog.BitLevel)
 
 	zcli.Name = service.AppName
-	zcli.Version = "1.0.0"
-
 	zcli.EnableDetach = true
+	zcli.Version = "1.0.0"
 
 	err := zutil.TryCatch(func() (err error) {
 		di := InitDI()
 
 		err = zcli.LaunchServiceRun(zcli.Name, "", func() {
+			common.Fatal(Init(di, true))
 			common.Fatal(Start(di))
 		})
 

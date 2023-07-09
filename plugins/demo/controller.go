@@ -1,6 +1,8 @@
 package demo
 
 import (
+	"reflect"
+
 	"github.com/zlsgo/app_core/service"
 
 	"github.com/sohaha/zlsgo/znet"
@@ -9,7 +11,12 @@ import (
 
 type Index struct {
 	service.App
+	Path string
 }
+
+var (
+	_ = reflect.TypeOf(&Index{})
+)
 
 func (h *Index) Init(r *znet.Engine) error {
 	// 注册中间件

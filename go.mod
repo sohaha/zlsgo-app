@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/sohaha/zlsgo v1.6.2
-	github.com/zlsgo/app_core v0.0.0-20230709140838-0c2555178e2c
+	github.com/zlsgo/app_core v0.0.0-20230709192754-0184053ea83f
 	github.com/zlsgo/conf v0.0.0-20230530142538-c42fe7562dfa
 )
 
@@ -28,3 +28,7 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+// replace github.com/sohaha/zlsgo_plugins => ../../GoCode/zlsgo_plugins
+
+// replace github.com/zlsgo/app_core => ../../GoCode/app_core

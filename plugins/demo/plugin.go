@@ -1,6 +1,8 @@
 package demo
 
 import (
+	"reflect"
+
 	"github.com/zlsgo/app_core/service"
 )
 
@@ -8,7 +10,10 @@ type Plugin struct {
 	service.App
 }
 
-var _ service.Plugin = &Plugin{}
+var (
+	_                = reflect.TypeOf(&Index{})
+	_ service.Plugin = &Plugin{}
+)
 
 func (p *Plugin) Name() string {
 	// 插件名称

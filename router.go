@@ -2,6 +2,7 @@ package main
 
 import (
 	"app/controller"
+	"net/http"
 
 	"github.com/zlsgo/app_core/service"
 
@@ -28,5 +29,14 @@ func RegMiddleware(_ *service.Conf, _ *service.App) []znet.Handler {
 // RegRouterBefore 注册路由前置处理
 func RegRouterBefore(_ *service.Conf, _ *service.App) service.RouterBeforeProcess {
 	return func(r *service.Web, app *service.App) {
+		// 处理不存在的路由请求
+		r.NotFoundHandler(func(c *znet.Context) {
+			c.JSON(http.StatusNotFound,
+				znet.ApiData{
+					Code: 404,
+					Msg:  "Not Found",
+					Data: struct{}{},
+				})
+		})
 	}
 }

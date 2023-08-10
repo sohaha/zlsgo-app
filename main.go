@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/internal"
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/zutil"
@@ -15,15 +16,17 @@ func main() {
 	zcli.EnableDetach = true
 	zcli.Version = "1.0.0"
 
+	var c *service.Conf
 	err := zutil.TryCatch(func() (err error) {
-		di := InitDI()
+		di := internal.InitDI()
 
 		err = zcli.LaunchServiceRun(zcli.Name, "", func() {
-			common.Fatal(Init(di, true))
-			common.Fatal(Start(di))
+			c, err = internal.Init(di, true)
+			common.Fatal(err)
+			common.Fatal(internal.Start(di))
 		})
 
-		_, _ = di.Invoke(Stop)
+		_, _ = di.Invoke(internal.Stop)
 		return err
 	})
 

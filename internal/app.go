@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"net/http"
@@ -16,10 +16,6 @@ import (
 
 	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zerror"
-)
-
-var (
-	c *service.Conf
 )
 
 func InitDI() zdi.Injector {
@@ -92,21 +88,21 @@ func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
 	}
 }
 
-func Init(di zdi.Injector, loadPlugin bool) (err error) {
+func Init(di zdi.Injector, loadPlugin bool) (c *service.Conf, err error) {
 	if loadPlugin {
 		err = di.InvokeWithErrorOnly(service.InitPlugin)
 		if err != nil {
-			return zerror.With(err, "初始化插件失败")
+			return nil, zerror.With(err, "初始化插件失败")
 		}
 	}
 
 	err = di.Resolve(&c)
 	if err != nil {
-		return zerror.With(err, "初始化配置失败")
+		return nil, zerror.With(err, "初始化配置失败")
 	}
 
 	ztime.SetTimeZone(int(c.Base.Zone))
-	return nil
+	return
 }
 
 func Start(di zdi.Injector) error {

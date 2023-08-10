@@ -1,9 +1,9 @@
-package main
+package internal
 
 import (
-	"app/controller"
 	"net/http"
 
+	"app/internal/controller"
 	"github.com/zlsgo/app_core/service"
 
 	"github.com/sohaha/zlsgo/znet"

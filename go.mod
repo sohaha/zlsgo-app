@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/sohaha/zlsgo v1.6.3
-	github.com/zlsgo/app_core v0.0.0-20230810101952-90f93310c17f
+	github.com/zlsgo/app_core v0.0.0-20230812090920-455dae22ab9c
 	github.com/zlsgo/conf v0.0.0-20230810101541-245eb0888395
 )
 

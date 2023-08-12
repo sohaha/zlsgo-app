@@ -23,7 +23,7 @@ func InitDI() zdi.Injector {
 
 	di.Map(di, zdi.WithInterface((*zdi.Injector)(nil)))
 
-	di.Provide(service.NewConf(func(o *conf.Option) {
+	di.Provide(service.NewConf(func(o *conf.Options) {
 		o.AutoCreate = true
 	}))
 

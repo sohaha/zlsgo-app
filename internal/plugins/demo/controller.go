@@ -3,14 +3,13 @@ package demo
 import (
 	"reflect"
 
-	"github.com/zlsgo/app_core/service"
-
+	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/ztype"
 )
 
 type Index struct {
-	service.App
+	di   zdi.Invoker
 	Path string
 }
 

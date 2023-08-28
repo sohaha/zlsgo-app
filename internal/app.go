@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"app/internal/errcode"
-	"github.com/sohaha/zlsgo/zreflect"
 
 	"github.com/sohaha/zlsgo/ztime"
 	"github.com/zlsgo/conf"
@@ -120,11 +119,5 @@ func Start(di zdi.Injector) error {
 }
 
 func Stop(di zdi.Invoker, ps []service.Plugin) {
-	for _, p := range ps {
-		of := zreflect.ValueOf(p)
-		stop := of.MethodByName("Stop")
-		if stop.IsValid() {
-			_, _ = di.Invoke(stop.Interface())
-		}
-	}
+
 }

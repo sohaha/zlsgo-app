@@ -3,9 +3,9 @@ module app
 go 1.18
 
 require (
-	github.com/sohaha/zlsgo v1.6.3
-	github.com/zlsgo/app_core v0.0.0-20230812090920-455dae22ab9c
-	github.com/zlsgo/conf v0.0.0-20230810101541-245eb0888395
+	github.com/sohaha/zlsgo v1.6.4
+	github.com/zlsgo/app_core v0.0.0-20230828091054-709c3ca7428a
+	github.com/zlsgo/conf v0.0.0-20230828083934-7a7431227be5
 )
 
 require (
@@ -19,12 +19,17 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.16.0 // indirect
-	github.com/subosito/gotenv v1.4.2 // indirect
+	github.com/subosito/gotenv v1.6.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/exp v0.0.0-20230810033253-352e893a4cad // indirect
+	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
 	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+)
+
+replace (
+	github.com/sohaha/zlsgo => ../zlsgo-dev
+	github.com/zlsgo/app_core => ../app_core
 )

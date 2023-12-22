@@ -1,4 +1,4 @@
-package demo
+package example
 
 import (
 	"reflect"
@@ -21,6 +21,11 @@ func (h *Index) Init(r *znet.Engine) error {
 	// 注册中间件
 	r.Use(func(c *znet.Context) {
 		c.Next()
+	})
+
+	// 手动注册路由
+	r.GET("/manual/:id", func(c *znet.Context) string {
+		return "id: " + c.GetParam("id")
 	})
 	return nil
 }

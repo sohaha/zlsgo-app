@@ -1,19 +1,18 @@
-package demo
+package example
 
 import (
 	"reflect"
 
-	"github.com/sohaha/zlsgo/zdi"
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/zlsgo/app_core/service"
 )
 
 type Plugin struct {
-	di  zdi.Invoker
 	log *zlog.Logger
 
-	// service.App
+	// di  zdi.Invoker
 
+	// service.App
 	service.Pluginer
 }
 

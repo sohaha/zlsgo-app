@@ -92,13 +92,13 @@ func Init(di zdi.Injector, loadPlugin bool) (c *service.Conf, err error) {
 	if loadPlugin {
 		err = di.InvokeWithErrorOnly(service.InitPlugin)
 		if err != nil {
-			return nil, zerror.With(err, "初始化插件失败")
+			return nil, zerror.With(err, "failed to initialize plugin")
 		}
 	}
 
 	err = di.Resolve(&c)
 	if err != nil {
-		return nil, zerror.With(err, "初始化配置失败")
+		return nil, zerror.With(err, "failed to initialize configuration")
 	}
 
 	ztime.SetTimeZone(int(c.Base.Zone))
@@ -108,12 +108,12 @@ func Init(di zdi.Injector, loadPlugin bool) (c *service.Conf, err error) {
 func Start(di zdi.Injector) error {
 	err := di.InvokeWithErrorOnly(service.InitTask)
 	if err != nil {
-		return zerror.With(err, "定时任务启动失败")
+		return zerror.With(err, "timed task launch failed")
 	}
 
 	err = di.InvokeWithErrorOnly(service.RunWeb)
 	if err != nil {
-		err = zerror.With(err, "服务启动失败")
+		err = zerror.With(err, "service startup failed")
 	}
 	return err
 }

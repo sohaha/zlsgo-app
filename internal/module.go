@@ -6,8 +6,8 @@ import (
 	"github.com/zlsgo/app_core/service"
 )
 
-func RegPlugin() []service.Plugin {
-	return []service.Plugin{
+func RegModule() []service.Module {
+	return []service.Module{
 		example.New(),
 	}
 }

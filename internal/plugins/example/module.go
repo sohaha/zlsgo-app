@@ -7,21 +7,21 @@ import (
 	"github.com/zlsgo/app_core/service"
 )
 
-type Plugin struct {
+type Module struct {
 	log *zlog.Logger
 
 	// di  zdi.Invoker
 
 	// service.App
-	service.Pluginer
+	service.ModuleLifeCycle
 }
 
 var (
-	_                = reflect.TypeOf(&Plugin{})
-	_ service.Plugin = &Plugin{}
+	_                = reflect.TypeOf(&Module{})
+	_ service.Module = &Module{}
 )
 
 // Name 插件名称，非必须
-func (p *Plugin) Name() string {
+func (p *Module) Name() string {
 	return "Example"
 }

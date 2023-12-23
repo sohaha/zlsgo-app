@@ -33,11 +33,11 @@ type Share struct {
 }
 
 // New 实例化插件
-func New() (p *Plugin) {
+func New() (p *Module) {
 	service.DefaultConf = append(service.DefaultConf, conf)
 
-	return &Plugin{
-		Pluginer: service.Pluginer{
+	return &Module{
+		ModuleLifeCycle: service.ModuleLifeCycle{
 			OnLoad: func(di zdi.Invoker) (any, error) {
 				// 配置解析完成后执行
 
@@ -74,7 +74,7 @@ func New() (p *Plugin) {
 				// 程序停止之前执行
 				return nil
 			},
-			Service: &service.PluginService{
+			Service: &service.ModuleService{
 				Controllers: []service.Controller{&Index{}},
 				Tasks: []service.Task{
 					{

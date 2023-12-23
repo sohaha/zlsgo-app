@@ -36,7 +36,7 @@ func InitDI() zdi.Injector {
 	di.Provide(RegMiddleware)
 	di.Provide(RegRouter)
 	di.Provide(RegRouterBefore)
-	di.Provide(RegPlugin)
+	di.Provide(RegModule)
 	di.Provide(RegTasks)
 	di.Provide(RegErrHandler)
 
@@ -118,6 +118,6 @@ func Start(di zdi.Injector) error {
 	return err
 }
 
-func Stop(di zdi.Invoker, ps []service.Plugin) {
+func Stop(di zdi.Invoker, ps []service.Module) {
 
 }

@@ -88,9 +88,9 @@ func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
 	}
 }
 
-func Init(di zdi.Injector, loadPlugin bool) (c *service.Conf, err error) {
-	if loadPlugin {
-		err = di.InvokeWithErrorOnly(service.InitPlugin)
+func Init(di zdi.Injector, loadModule bool) (c *service.Conf, err error) {
+	if loadModule {
+		err = di.InvokeWithErrorOnly(service.InitModule)
 		if err != nil {
 			return nil, zerror.With(err, "failed to initialize plugin")
 		}

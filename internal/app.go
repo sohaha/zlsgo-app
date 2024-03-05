@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"context"
 	"net/http"
 	"strings"
 
@@ -18,8 +19,14 @@ import (
 	"github.com/sohaha/zlsgo/zerror"
 )
 
-func InitDI() zdi.Injector {
+func InitDI(ctx ...context.Context) zdi.Injector {
 	di := zdi.New()
+
+	if len(ctx) > 0 {
+		di.Map(ctx[0])
+	} else {
+		di.Map(context.Background())
+	}
 
 	di.Map(di, zdi.WithInterface((*zdi.Injector)(nil)))
 

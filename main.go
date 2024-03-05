@@ -2,9 +2,12 @@ package main
 
 import (
 	"app/internal"
+	"context"
+
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
 	"github.com/sohaha/zlsgo/zutil"
+	"github.com/sohaha/zlsgo/zutil/daemon"
 	"github.com/zlsgo/app_core/common"
 	"github.com/zlsgo/app_core/service"
 )
@@ -18,13 +21,16 @@ func main() {
 
 	var c *service.Conf
 	err := zutil.TryCatch(func() (err error) {
-		di := internal.InitDI()
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+
+		di := internal.InitDI(ctx)
 
 		err = zcli.LaunchServiceRun(zcli.Name, "", func() {
 			c, err = internal.Init(di, true)
 			common.Fatal(err)
 			common.Fatal(internal.Start(di))
-		})
+		}, &daemon.Config{Context: ctx})
 
 		_, _ = di.Invoke(internal.Stop)
 		return err

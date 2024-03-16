@@ -4,3 +4,4 @@ zlsapp_*_*
 *ip.xdb
 *db.db
 .DS_Store
+conf.toml

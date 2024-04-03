@@ -22,7 +22,7 @@ func (h *Index) Init(r *znet.Engine) error {
 	return nil
 }
 
-func (h *Index) GET(r *znet.Context) (ztype.Map, error) {
+func (h *Index) GET(c *znet.Context) (ztype.Map, error) {
 	return ztype.Map{"hello": "world"}, nil
 }
 

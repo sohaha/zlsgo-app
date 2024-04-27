@@ -13,11 +13,9 @@ import (
 )
 
 func main() {
-	zlog.ResetFlags(zlog.BitLevel)
-
 	zcli.Name = service.AppName
 	zcli.EnableDetach = true
-	zcli.Version = "1.0.0"
+	zcli.Version = "0.1.0"
 
 	var c *service.Conf
 	err := zutil.TryCatch(func() (err error) {

@@ -28,7 +28,7 @@ WORKDIR /app
 COPY --from=builder /app/zls /app/zls
 
 # 暴露一个端口
-EXPOSE 3788
+EXPOSE 8181
 
 # 执行程序
 CMD ["./zls"]
@@ -37,7 +37,7 @@ CMD ["./zls"]
 # docker build -t zlsapp:v1 -f ./Dockerfile  .
 
 # 启动容器
-# docker run --rm -it -p 3788:3788 zlsapp:v1
+# docker run --rm -it -p 8181:8181 zlsapp:v1
 
 # 进入容器
 # docker run --rm -it zlsapp:v1 sh

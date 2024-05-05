@@ -30,12 +30,14 @@ func InitDI(ctx ...context.Context) zdi.Injector {
 
 	di.Map(di, zdi.WithInterface((*zdi.Injector)(nil)))
 
-	di.Provide(service.NewConf(func(o *conf.Options) {
+	di.Provide(service.NewConf(func(o conf.Options) conf.Options {
 		o.AutoCreate = true
+		return o
 	}))
 
-	di.Provide(service.NewApp(func(o *service.BaseConf) {
+	di.Provide(service.NewApp(func(o service.BaseConf) service.BaseConf {
 		o.Port = "8181"
+		return o
 	}))
 
 	di.Provide(service.NewWeb())

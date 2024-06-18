@@ -1,6 +1,6 @@
 zzz-watch.yaml
 tmpApp*
-zlsapp_*_*
+app_*_*
 *ip.xdb
 *db.db
 .DS_Store

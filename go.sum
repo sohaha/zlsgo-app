@@ -1551,6 +1551,8 @@ github.com/sirupsen/logrus v1.6.0/go.mod h1:7uNnSEd1DgxDLC74fIahvMZmmYsHGZGEOFrf
 github.com/sohaha/zlsgo v1.7.11/go.mod h1:MBjtFRux3Ygww2NvAZbPyw8KKkIAfIRIl0UmeBNGmx0=
 github.com/sohaha/zlsgo v1.7.12 h1:KAz4h7RHZNuoCAn6vyK8iwKnSbjP6bSCDrpS/fqyyA4=
 github.com/sohaha/zlsgo v1.7.12/go.mod h1:7LViqB5ll09RnlU5V5AW0oBnqFg260/q+B/SGDNNdmQ=
+github.com/sohaha/zlsgo v1.7.14-0.20240618115254-3a7e159d54b5 h1:rxPIAasEmbMSwxghfGUiLmB2S0DayFmjpGdpUm4AxWA=
+github.com/sohaha/zlsgo v1.7.14-0.20240618115254-3a7e159d54b5/go.mod h1:7LViqB5ll09RnlU5V5AW0oBnqFg260/q+B/SGDNNdmQ=
 github.com/sourcegraph/conc v0.3.0 h1:OQTbbt6P72L20UqAkXXuLOj79LfEanQ+YQFNpLA9ySo=
 github.com/sourcegraph/conc v0.3.0/go.mod h1:Sdozi7LEKbFPqYX2/J+iBAM6HpqSLTASQIKqDmF7Mt0=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
@@ -1601,6 +1603,8 @@ github.com/zlsgo/app_core v0.0.0-20240505115109-f874da6ff55f h1:butBAotJMPNEPijs
 github.com/zlsgo/app_core v0.0.0-20240505115109-f874da6ff55f/go.mod h1:RQOadcVxMrs75icmUnCa1UorC+xV43X9uqeR3tuqgfk=
 github.com/zlsgo/app_core v0.0.0-20240505120118-a0d5a2fa33b8 h1:D08/JOyu4f6ELirD+qTdvBcdXVkbpIaDUuIU8Tw+nt8=
 github.com/zlsgo/app_core v0.0.0-20240505120118-a0d5a2fa33b8/go.mod h1:IqMoH9h3EW54+q4h2ghvFb5598r0qb1NubqfnPxUuNk=
+github.com/zlsgo/app_core v0.0.0-20240618120034-42a3bc5f113e h1:r7VN068XeJcQsSNpuNSPszKYDdTpl2W6DpxCqEzutfk=
+github.com/zlsgo/app_core v0.0.0-20240618120034-42a3bc5f113e/go.mod h1:h8yZ+Z+B/O9hUYDxm6WRXIcoNOY7rHx5DmTHIHTYvnM=
 github.com/zlsgo/conf v0.0.0-20240413083322-de9f5834b572 h1:ZQNjBafHLRGAODvGjc/YaQvPdJkCPOC2rjx730pa7lM=
 github.com/zlsgo/conf v0.0.0-20240413083322-de9f5834b572/go.mod h1:NUFV1dpJTfUktznklXvMw9O7LMmz31+GUUOMyDOgFZM=
 github.com/zlsgo/conf v0.0.0-20240505115821-18843a4ffaea h1:VxhwkCZmTeC40ImFlpmAkTXmwtJ4wfQT1RhgEd3SI/k=

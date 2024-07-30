@@ -53,7 +53,7 @@ func InitDI(ctx ...context.Context) zdi.Injector {
 }
 
 func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
-	var tagMap = map[zerror.TagKind]int{
+	tagMap := map[zerror.TagKind]int{
 		zerror.Internal:         http.StatusInternalServerError,
 		zerror.InvalidInput:     http.StatusBadRequest,
 		zerror.PermissionDenied: http.StatusForbidden,
@@ -69,6 +69,14 @@ func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
 		if val, ok := tagMap[tag]; ok {
 			statusCode = val
 			code = int32(errcode.ServerError)
+			switch tag {
+			case zerror.Unauthorized:
+				code = int32(errcode.Unauthorized)
+			case zerror.PermissionDenied:
+				code = int32(errcode.PermissionDenied)
+			case zerror.InvalidInput:
+				code = int32(errcode.InvalidInput)
+			}
 		} else {
 			errCode, ok := zerror.UnwrapCode(err)
 			if ok && errCode != 0 {
@@ -128,5 +136,4 @@ func Start(di zdi.Injector) error {
 }
 
 func Stop(di zdi.Invoker, ps []service.Module) {
-
 }

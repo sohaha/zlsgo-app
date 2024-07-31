@@ -109,13 +109,13 @@ func Init(di zdi.Injector, loadModule bool) (c *service.Conf, err error) {
 	if loadModule {
 		err = di.InvokeWithErrorOnly(service.InitModule)
 		if err != nil {
-			return nil, zerror.With(err, "failed to initialize plugin")
+			return nil, zerror.With(err, "failed to init module")
 		}
 	}
 
 	err = di.Resolve(&c)
 	if err != nil {
-		return nil, zerror.With(err, "failed to initialize configuration")
+		return nil, zerror.With(err, "failed to init config")
 	}
 
 	ztime.SetTimeZone(int(c.Base.Zone))

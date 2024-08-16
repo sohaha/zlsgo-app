@@ -13,4 +13,7 @@ const (
 	PermissionDenied  ErrCode = 20102
 	Unavailable       ErrCode = 20103
 	InvalidAccount    ErrCode = 20104
+
+	SystemError      ErrCode = 50000
+	DatabaseError    ErrCode = 50001
 )

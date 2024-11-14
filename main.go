@@ -1,8 +1,9 @@
 package main
 
 import (
-	"app/internal"
 	"context"
+
+	"app/internal"
 
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
@@ -30,6 +31,7 @@ func main() {
 }
 
 func setup() (conf *service.Conf, err error) {
+	_ = zutil.Loadenv()
 	err = zutil.TryCatch(func() (err error) {
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()

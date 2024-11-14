@@ -8,6 +8,7 @@ import (
 	"app/internal/errcode"
 
 	"github.com/sohaha/zlsgo/ztime"
+	"github.com/sohaha/zlsgo/zutil"
 	"github.com/zlsgo/conf"
 
 	"github.com/sohaha/zlsgo/zlog"
@@ -36,7 +37,9 @@ func InitDI(ctx ...context.Context) zdi.Injector {
 	}))
 
 	di.Provide(service.NewApp(func(o service.BaseConf) service.BaseConf {
-		o.Port = "8181"
+		// Can be set via environment variables or configuration file
+		o.Port = zutil.Getenv("PORT", "8181")
+		o.Debug = strings.ToLower(zutil.Getenv("DEBUG", "false")) == "true"
 		return o
 	}))
 

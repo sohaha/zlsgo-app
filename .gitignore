@@ -5,3 +5,4 @@ app_*_*
 *db.db
 .DS_Store
 conf.toml
+.env

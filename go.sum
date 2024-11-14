@@ -1614,6 +1614,13 @@ github.com/zeebo/assert v1.3.0/go.mod h1:Pq9JiuJQpG8JLJdtkwrJESF0Foym2/D9XMU5ciN
 github.com/zeebo/xxh3 v1.0.2/go.mod h1:5NWz9Sef7zIDm2JHfFlcQvNekmcEl9ekUZQQKCYaDcA=
 github.com/zlsgo/app_core v0.0.0-20240820091636-f33c122ee40f h1:enEw08di1r+cmH4+lxgEp5GJ9VV1y1z6qISPq8upgmM=
 github.com/zlsgo/app_core v0.0.0-20240820091636-f33c122ee40f/go.mod h1:h8yZ+Z+B/O9hUYDxm6WRXIcoNOY7rHx5DmTHIHTYvnM=
+github.com/zlsgo/app_core v0.0.0-20241114064619-97080c1f2976/go.mod h1:9nrjQ2uvnLXizKe4JrSr0fudzCazUDKcwdB8p607GfQ=
+github.com/zlsgo/app_core v0.0.0-20241114082703-0af55a33079c h1:NS6xN1xqzRg3ga1N77vvn42B/ONNj0MOYoOM1Cwdg5k=
+github.com/zlsgo/app_core v0.0.0-20241114082703-0af55a33079c/go.mod h1:9nrjQ2uvnLXizKe4JrSr0fudzCazUDKcwdB8p607GfQ=
+github.com/zlsgo/app_module v0.0.0-20241114075422-a4384e69b9ca h1:RsHE82/fkLMs7bb2pTRcalw+jsrCYKJVpLeC4wjDnyc=
+github.com/zlsgo/app_module v0.0.0-20241114075422-a4384e69b9ca/go.mod h1:NTdR1XJTtLay1I0JM1+fYVB60HjZdYLBJOjS3oNjUYU=
+github.com/zlsgo/app_module v0.0.0-20241114102704-7b8c5ea9cf7f h1:dgNcheLyuUC9IpJmGvChZOyTh7mvSSnvOAhQAnDebQ0=
+github.com/zlsgo/app_module v0.0.0-20241114102704-7b8c5ea9cf7f/go.mod h1:Y2ucI698bj4UYw5+oaLJDWfd/8BeITArse/lQAPRG2E=
 github.com/zlsgo/conf v0.0.0-20240505115821-18843a4ffaea h1:VxhwkCZmTeC40ImFlpmAkTXmwtJ4wfQT1RhgEd3SI/k=
 github.com/zlsgo/conf v0.0.0-20240505115821-18843a4ffaea/go.mod h1:6AqTvHDYltmv6oBiqyhuZXgCYAZOmUugj5IA7/8+weQ=
 go.etcd.io/etcd/api/v3 v3.5.10/go.mod h1:TidfmT4Uycad3NM/o25fG3J07odo4GBB9hoxaodFCtI=

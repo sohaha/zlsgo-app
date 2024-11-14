@@ -6,7 +6,7 @@ toolchain go1.23.0
 
 require (
 	github.com/sohaha/zlsgo v1.7.17
-	github.com/zlsgo/app_core v0.0.0-20240820091636-f33c122ee40f
+	github.com/zlsgo/app_core v0.0.0-20241114082703-0af55a33079c
 	github.com/zlsgo/conf v0.0.0-20240505115821-18843a4ffaea
 )
 
@@ -24,6 +24,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
+	github.com/zlsgo/app_module v0.0.0-20241114102704-7b8c5ea9cf7f // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f // indirect

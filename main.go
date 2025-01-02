@@ -23,7 +23,7 @@ func init() {
 func main() {
 	if conf, err := setup(); err != nil {
 		if conf == nil || !conf.Base.Debug {
-			zcli.Error(err.Error())
+			zcli.Error("%s", err.Error())
 		} else {
 			zlog.Errorf("%+v\n", err)
 		}

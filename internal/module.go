@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"app/internal/module/example"
+	"app/module/example"
 
 	"github.com/zlsgo/app_core/service"
 )

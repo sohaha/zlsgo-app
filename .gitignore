@@ -1,8 +1,9 @@
 zzz-watch.yaml
 tmpApp*
-app_*_*
+*_darwin_a*64*
+*_linux_a*64*
+*_windows_a*64*
 *ip.xdb
 *db.db
 .DS_Store
-conf.toml
 .env

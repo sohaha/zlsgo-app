@@ -23,7 +23,7 @@ func (h *Index) Init(r *znet.Engine) error {
 }
 
 func (h *Index) GET(c *znet.Context) (ztype.Map, error) {
-	return ztype.Map{"hello": "world"}, nil
+	return ztype.Map{"hello": c.GetClientIP()}, nil
 }
 
 type Body struct {

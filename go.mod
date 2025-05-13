@@ -1,10 +1,10 @@
 module app
 
-go 1.18
+go 1.20
 
 require (
-	github.com/sohaha/zlsgo v1.7.19-0.20250421041204-a1a46acddff2
-	github.com/zlsgo/app_core v0.0.0-20250421042828-13546fac417f
+	github.com/sohaha/zlsgo v1.7.19-0.20250513073914-64e6749be19a
+	github.com/zlsgo/app_core v0.0.0-20250513074027-d93ae4bce7fc
 	github.com/zlsgo/conf v0.0.0-20250421042600-ef858c116f8e
 )
 
@@ -25,7 +25,8 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/crypto v0.36.0 // indirect
-	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
+	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
+	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect

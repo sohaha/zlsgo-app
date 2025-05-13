@@ -7,6 +7,8 @@ import (
 
 	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zlog"
+	"github.com/sohaha/zlsgo/znet"
+	"github.com/sohaha/zlsgo/znet/realip"
 	"github.com/sohaha/zlsgo/zutil"
 	"github.com/sohaha/zlsgo/zutil/daemon"
 	"github.com/zlsgo/app_core/common"
@@ -15,9 +17,12 @@ import (
 
 func init() {
 	service.AppName = "ZlsApp"
+
 	zcli.Version = "0.1.0"
 	zcli.Name = service.AppName
 	zcli.EnableDetach = true
+
+	znet.TrustedProxies = realip.GetCloudflare(0)
 }
 
 func main() {

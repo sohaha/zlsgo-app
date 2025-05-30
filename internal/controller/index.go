@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"reflect"
+
 	"app/internal/errcode"
 
 	"github.com/zlsgo/app_core/service"
@@ -15,8 +17,9 @@ type Index struct {
 	service.App
 }
 
+var _ = reflect.TypeOf(&Index{})
+
 func (h *Index) Init(r *znet.Engine) error {
-	// 开放静态资源目录
 	r.Static("/static/", zfile.RealPath("./static"))
 
 	return nil

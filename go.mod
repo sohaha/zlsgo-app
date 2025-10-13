@@ -3,8 +3,8 @@ module app
 go 1.20
 
 require (
-	github.com/sohaha/zlsgo v1.7.19-0.20250528062223-5f195d5a72fd
-	github.com/zlsgo/app_core v0.0.0-20250513074027-d93ae4bce7fc
+	github.com/sohaha/zlsgo v1.7.19-0.20251009112837-8dd44218096b
+	github.com/zlsgo/app_core v0.0.0-20250709060923-a5d9a7b0e1ce
 	github.com/zlsgo/conf v0.0.0-20250421042600-ef858c116f8e
 )
 

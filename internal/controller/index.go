@@ -1,12 +1,16 @@
 package controller
 
 import (
+	"net/http"
 	"reflect"
+	"runtime"
+	"time"
 
 	"app/internal/errcode"
 
 	"github.com/zlsgo/app_core/service"
 
+	"github.com/sohaha/zlsgo/zcli"
 	"github.com/sohaha/zlsgo/zfile"
 	"github.com/sohaha/zlsgo/znet"
 	"github.com/sohaha/zlsgo/ztype"
@@ -27,6 +31,33 @@ func (h *Index) Init(r *znet.Engine) error {
 
 func (h *Index) GET(c *znet.Context) (ztype.Map, error) {
 	return ztype.Map{"hello": c.GetClientIP()}, nil
+}
+
+func (h *Index) HEAD(c *znet.Context) {
+	c.SetStatus(http.StatusNoContent)
+}
+
+func (h *Index) GETHealth(c *znet.Context) (ztype.Map, error) {
+	var memStats runtime.MemStats
+	runtime.ReadMemStats(&memStats)
+
+	return ztype.Map{
+		"status":    "healthy",
+		"timestamp": time.Now().Unix(),
+		"version":   zcli.Version,
+		"system": ztype.Map{
+			"go_version":   runtime.Version(),
+			"go_routines":  runtime.NumGoroutine(),
+			"memory_alloc": memStats.Alloc,
+			"memory_total": memStats.TotalAlloc,
+			"memory_sys":   memStats.Sys,
+			"gc_runs":      memStats.NumGC,
+		},
+		"config": ztype.Map{
+			"debug":    h.Conf.Base.Debug,
+			"timezone": h.Conf.Base.Zone,
+		},
+	}, nil
 }
 
 type Body struct {

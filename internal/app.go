@@ -55,57 +55,69 @@ func InitDI(ctx ...context.Context) zdi.Injector {
 	return di
 }
 
+// ErrorMapping 错误映射配置
+type ErrorMapping struct {
+	HTTPStatus int
+	ErrorCode  int32
+}
+
+// 默认错误映射配置
+var defaultErrorMappings = map[zerror.TagKind]ErrorMapping{
+	zerror.Internal:         {http.StatusInternalServerError, int32(errcode.ServerError)},
+	zerror.InvalidInput:     {http.StatusBadRequest, int32(errcode.InvalidInput)},
+	zerror.PermissionDenied: {http.StatusForbidden, int32(errcode.PermissionDenied)},
+	zerror.Unauthorized:     {http.StatusUnauthorized, int32(errcode.Unauthorized)},
+}
+
 func RegErrHandler(app *service.App) znet.ErrHandlerFunc {
-	tagMap := map[zerror.TagKind]int{
-		zerror.Internal:         http.StatusInternalServerError,
-		zerror.InvalidInput:     http.StatusBadRequest,
-		zerror.PermissionDenied: http.StatusForbidden,
-		zerror.Unauthorized:     http.StatusUnauthorized,
-	}
-
 	return func(c *znet.Context, err error) {
-		var (
-			code       int32
-			statusCode = http.StatusInternalServerError
-			tag        = zerror.GetTag(err)
-		)
-		if val, ok := tagMap[tag]; ok {
-			statusCode = val
-			code = int32(errcode.ServerError)
-			switch tag {
-			case zerror.Unauthorized:
-				code = int32(errcode.Unauthorized)
-			case zerror.PermissionDenied:
-				code = int32(errcode.PermissionDenied)
-			case zerror.InvalidInput:
-				code = int32(errcode.InvalidInput)
-			}
-		} else {
-			errCode, ok := zerror.UnwrapCode(err)
-			if ok && errCode != 0 {
-				code = int32(errCode)
-			} else {
-				code = int32(errcode.ServerError)
-			}
-			if tag != zerror.None {
-				statusCode = ztype.ToInt(string(tag))
-			}
-		}
-
-		allErr := zerror.UnwrapErrors(err)
-		errMsg := strings.Join(allErr, ": ")
-		if app.Conf.Base.Debug && len(allErr) > 1 {
-			zlog.Error(err)
-		}
-		if errMsg == "" {
-			errMsg = "unknown error"
-		}
+		statusCode, errorCode, errMsg := processError(err, app.Conf.Base.Debug)
 
 		c.JSON(int32(statusCode), map[string]interface{}{
-			"code": code,
+			"code": errorCode,
 			"msg":  errMsg,
 		})
 	}
+}
+
+// processError 处理错误并返回HTTP状态码、错误码和错误消息
+func processError(err error, debug bool) (statusCode int, errorCode int32, errMsg string) {
+	tag := zerror.GetTag(err)
+
+	// 尝试从预定义映射中获取错误信息
+	if mapping, ok := defaultErrorMappings[tag]; ok {
+		statusCode = mapping.HTTPStatus
+		errorCode = mapping.ErrorCode
+	} else {
+		// 处理自定义错误码
+		if code, hasCode := zerror.UnwrapCode(err); hasCode && code != 0 {
+			errorCode = int32(code)
+		} else {
+			errorCode = int32(errcode.ServerError)
+		}
+
+		// 处理自定义HTTP状态码
+		statusCode = http.StatusInternalServerError
+		if tag != zerror.None {
+			if customStatus := ztype.ToInt(string(tag)); customStatus > 0 {
+				statusCode = customStatus
+			}
+		}
+	}
+
+	// 处理错误消息
+	allErr := zerror.UnwrapErrors(err)
+	errMsg = strings.Join(allErr, ": ")
+	if errMsg == "" {
+		errMsg = "unknown error"
+	}
+
+	// 调试模式下记录详细错误
+	if debug && len(allErr) > 1 {
+		zlog.Error(err)
+	}
+
+	return
 }
 
 func Init(di zdi.Injector, loadModule bool) (c *service.Conf, err error) {
